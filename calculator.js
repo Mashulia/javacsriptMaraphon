@@ -1,20 +1,20 @@
-function calc(action, a, b) {
+function Calc(operation, a, b) {
   let result;
-  let isFullData = (action !== undefined && a !== undefined && b !== undefined);
-  let isDivisionByZero = (action === "div" && b === 0) || (action === "rem" && b === 0);
+  let isFullData = (operation !== undefined && a !== undefined && b !== undefined);
+  let isDivisionByZero = (operation === "div" && b === 0) || (operation === "rem" && b === 0);
   let isNotTypeNumber = typeof (a) !== "number" || typeof (b) !== "number";
   if (!isFullData) {
-    alert("Error!!! Вы ввели не все данные");
+    console.log("Error!!! Вы ввели не все данные");
     return;
   } else if (isNotTypeNumber) {
-    alert("Error!!! Вы ввели не число");
+    console.log("Error!!! Вы ввели не число");
     return;
   } else if (isDivisionByZero) {
-    alert("Error!!! На 0 делить нельзя");
+    console.log("Error!!! На 0 делить нельзя");
     return;
   }
   else {
-    switch (action) {
+    switch (operation) {
       case "sum":
         result = a + b;
         break;
@@ -35,16 +35,26 @@ function calc(action, a, b) {
         break;
       default:
         result = "Error";
-        alert("unknown operation")
+        console.log("unknown operation")
     }
   }
   if (isNaN(result)) {
-    alert("Error");
+    console.log("Error");
   } else {
-    alert(`Результат операции равен ${result}`);
+    console.log(`Результат операции равен ${result}`);
   }
 }
 
-calc("multi", 4, "6");
+Calc("multi", 4, 6);
+Calc("rem", 10, 6);
+Calc("sum", 4, 6);
+Calc("sub", 4, 3);
+Calc("div", 4, 0);
+Calc("div", 4, 2);
+Calc("pow", 4, 9);
+Calc("pw", 4, 9);
+Calc(4, 9);
+Calc(9);
+Calc();
 
 
