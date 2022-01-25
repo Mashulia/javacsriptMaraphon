@@ -1,8 +1,31 @@
+const OPERATIONS = {
+  sum: (a, b) => {
+    return a + b;
+  },
+  sub: (a, b) => {
+    return a - b;
+  },
+  div: (a, b) => {
+    return a / b;
+  },
+  multi: (a, b) => {
+    return a * b;
+  },
+  rem: (a, b) => {
+    return a % b;
+  },
+  pow: (a, b) => {
+    return a ** b;
+  },
+};
+
 function Calc(operation, a, b) {
   let result;
-  let isFullData = (operation !== undefined && a !== undefined && b !== undefined);
-  let isDivisionByZero = (operation === "div" && b === 0) || (operation === "rem" && b === 0);
-  let isNotTypeNumber = typeof (a) !== "number" || typeof (b) !== "number";
+  let isFullData =
+    operation !== undefined && a !== undefined && b !== undefined;
+  let isDivisionByZero =
+    (operation === "div" && b === 0) || (operation === "rem" && b === 0);
+  let isNotTypeNumber = typeof a !== "number" || typeof b !== "number";
   if (!isFullData) {
     console.log("Error!!! Вы ввели не все данные");
     return;
@@ -12,37 +35,13 @@ function Calc(operation, a, b) {
   } else if (isDivisionByZero) {
     console.log("Error!!! На 0 делить нельзя");
     return;
-  }
-  else {
-    switch (operation) {
-      case "sum":
-        result = a + b;
-        break;
-      case "sub":
-        result = a - b;
-        break;
-      case "div":
-        result = a / b;
-        break;
-      case "multi":
-        result = a * b;
-        break;
-      case "rem":
-        result = a % b;
-        break;
-      case "pow":
-        result = a ** b;
-        break;
-      default:
-        result = "Error";
-        console.log("unknown operation")
-    }
-  }
-  if (isNaN(result)) {
-    console.log("Error");
   } else {
-    console.log(`Результат операции равен ${result}`);
+    result =
+      OPERATIONS[operation] != undefined
+        ? OPERATIONS[operation](a, b)
+        : "unknown operation";
   }
+  console.log(result);
 }
 
 Calc("multi", 4, 6);
@@ -56,5 +55,3 @@ Calc("pw", 4, 9);
 Calc(4, 9);
 Calc(9);
 Calc();
-
-
