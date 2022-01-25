@@ -1,25 +1,13 @@
-const OPERATIONS = {
-  sum: (a, b) => {
-    return a + b;
-  },
-  sub: (a, b) => {
-    return a - b;
-  },
-  div: (a, b) => {
-    return a / b;
-  },
-  multi: (a, b) => {
-    return a * b;
-  },
-  rem: (a, b) => {
-    return a % b;
-  },
-  pow: (a, b) => {
-    return a ** b;
-  },
-};
-
 function Calc(operation, a, b) {
+  const OPERATIONS = {
+    sum: a + b,
+    sub: a - b,
+    div: a / b,
+    multi: a * b,
+    rem: a % b,
+    pow: a ** b,
+  };
+
   let result;
   let isFullData =
     operation !== undefined && a !== undefined && b !== undefined;
@@ -38,7 +26,7 @@ function Calc(operation, a, b) {
   } else {
     result =
       OPERATIONS[operation] != undefined
-        ? OPERATIONS[operation](a, b)
+        ? OPERATIONS[operation]
         : "unknown operation";
   }
   console.log(result);
