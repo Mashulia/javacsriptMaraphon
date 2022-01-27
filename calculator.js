@@ -25,7 +25,7 @@ function Calc(operation, a, b) {
     return;
   } else {
     result =
-      OPERATIONS[operation] != undefined
+      OPERATIONS[operation] !== undefined
         ? OPERATIONS[operation]
         : "unknown operation";
   }
