@@ -40,7 +40,7 @@ function showList(obj) {
   if (doneTasks.length === 0) {
     doneTasks += "\n -";
   }
-  return `Todo: ${toDoTasks} \nIn Progress: ${inProgressTasks} \nDone: ${doneTasks}`;
+  console.log(`Todo: ${toDoTasks} \nIn Progress: ${inProgressTasks} \nDone: ${doneTasks}`);
 }
 
 changeStatus("create a new practice task", "Done");
@@ -56,4 +56,4 @@ deleteTask("make a bed");
 deleteTask("create a new practice task");
 deleteTask("write a post");
 
-console.log(showList(list));
+showList(list);
