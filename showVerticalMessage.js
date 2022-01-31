@@ -1,20 +1,16 @@
 function showVerticalMessage(str) {
-  let UpperLetter = str.slice(0, 1).toUpperCase();
+  const MAX_LENGTH = 10;
+  const FIRST_LETTER = "М"
+  const UpperLetter = str.slice(0, 1).toUpperCase();
   let newString = "";
 
-  if (UpperLetter === "М") {
+  if (UpperLetter === FIRST_LETTER) {
     newString = UpperLetter + str.slice(1);
   } else newString = str;
 
-  if (newString.length > 10) {
-    for (let char of newString.slice(0, 10)) {
-      console.log(char);
-    }
-  } else {
-    for (let char of newString) {
-      console.log(char);
-    }
+  for (let char of newString.slice(0, MAX_LENGTH)) {
+    console.log(char);
   }
 }
 
-showVerticalMessage('марафон');
+showVerticalMessage('марафоныоыорпgjfgkk');
