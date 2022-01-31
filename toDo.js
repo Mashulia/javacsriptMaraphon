@@ -1,11 +1,16 @@
-const list = {
-  "create a new practice task": "In Progress",
-  "make a bed": "Done",
-  "write a post": "To Do",
+const STATUSES = {
+  TO_DO: "To Do",
+  IN_PROGRESS: "In Progress",
+  DONE: "Done",
 };
-let toDoTasks = "";
-let inProgressTasks = "";
-let doneTasks = "";
+
+const DEFAULT_STATUS = STATUSES.TO_DO;
+
+const list = {
+  "create a new practice task": STATUSES.IN_PROGRESS,
+  "make a bed": STATUSES.DONE,
+  "write a post": STATUSES.TO_DO,
+};
 
 function changeStatus(task, status) {
   if ([task] in list) {
@@ -14,46 +19,40 @@ function changeStatus(task, status) {
 }
 
 function addTask(task) {
-  list[task] = "To Do";
+  list[task] = DEFAULT_STATUS;
 }
 
 function deleteTask(task) {
   delete list[task];
 }
 
-function showList(obj) {
-  for (let task in obj) {
-    if (obj[task] == "To Do") {
-      toDoTasks += `\n \"${[task]}"`;
-    } else if (obj[task] == "In Progress") {
-      inProgressTasks += `\n \"${[task]}"`;
-    } else {
-      doneTasks += `\n \"${[task]}"`;
-    }
+function showList() {
+  let tasks = {
+    [STATUSES.TO_DO]: "",
+    [STATUSES.IN_PROGRESS]: "",
+    [STATUSES.DONE]: "",
+  };
+
+  for (let key in list) {
+    tasks[list[key]] += `\n \"${[key]}"`;
   }
-  if (toDoTasks.length === 0) {
-    toDoTasks += "\n -";
-  }
-  if (inProgressTasks.length === 0) {
-    inProgressTasks += "\n -";
-  }
-  if (doneTasks.length === 0) {
-    doneTasks += "\n -";
-  }
-  return `Todo: ${toDoTasks} \nIn Progress: ${inProgressTasks} \nDone: ${doneTasks}`;
+  console.log(
+    `Todo: ${tasks[STATUSES.TO_DO] || "\n -"} 
+    \rIn Progress: ${tasks[STATUSES.IN_PROGRESS] || "\n -"} 
+  \rDone: ${tasks[STATUSES.DONE] || "\n -"}`
+  );
 }
 
-changeStatus("create a new practice task", "Done");
+changeStatus("create a new practice task", STATUSES.DONE);
 addTask("have a walk");
 addTask("make toDo list");
 addTask("finish the work week");
 addTask("pass the algorithms exam");
-changeStatus("make toDo list", "Done");
-changeStatus("pass the algorithms exam", "In Progress");
-changeStatus("finish the work week", "In Progress");
-deleteTask("have a walk");
+changeStatus("make toDo list", STATUSES.DONE);
+changeStatus("pass the algorithms exam", STATUSES.DONE);
+changeStatus("finish the work week", STATUSES.DONE);
 deleteTask("make a bed");
 deleteTask("create a new practice task");
 deleteTask("write a post");
 
-console.log(showList(list));
+showList();
