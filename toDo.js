@@ -36,13 +36,13 @@ function showList() {
   for (let key in list) {
     tasks[list[key]] += `\n \"${[key]}"`;
   }
+
   console.log(
     `Todo: ${tasks[STATUSES.TO_DO] || "\n -"} 
     \rIn Progress: ${tasks[STATUSES.IN_PROGRESS] || "\n -"} 
   \rDone: ${tasks[STATUSES.DONE] || "\n -"}`
   );
 }
-
 changeStatus("create a new practice task", STATUSES.DONE);
 addTask("have a walk");
 addTask("make toDo list");
