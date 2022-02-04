@@ -3,56 +3,101 @@ const STATUSES = {
   IN_PROGRESS: "In Progress",
   DONE: "Done",
 };
-
-const DEFAULT_STATUS = STATUSES.TO_DO;
-
-const list = {
-  "create a new practice task": STATUSES.IN_PROGRESS,
-  "make a bed": STATUSES.DONE,
-  "write a post": STATUSES.TO_DO,
+const PRIORITY = {
+  HIGH: "high",
+  LOW: "low",
 };
 
+const DEFAULT_STATUS = STATUSES.TO_DO;
+const DEFAULT_PRIORITY = PRIORITY.HIGH;
+
+const list = [
+  {
+    name: "make toDo list",
+    status: STATUSES.TO_DO,
+    priority: PRIORITY.HIGH,
+  },
+  { name: "make a bed", status: STATUSES.DONE, priority: PRIORITY.LOW },
+  {
+    name: "finish the working week",
+    status: STATUSES.IN_PROGRESS,
+    priority: PRIORITY.LOW,
+  },
+  {
+    name: "to go to the hospital",
+    status: STATUSES.TO_DO,
+    priority: PRIORITY.HIGH,
+  },
+];
+
 function changeStatus(task, status) {
-  if ([task] in list) {
-    list[task] = status;
+  for (element of list) {
+    if (element.name === task) element.status = status;
+  }
+}
+function changePriority(task, priority) {
+  for (element of list) {
+    if (element.name === task) element.priority = priority;
   }
 }
 
 function addTask(task) {
-  list[task] = DEFAULT_STATUS;
+  for (element of list) {
+    if (element.name === task) {
+      return;
+    }
+  }
+  list.push({
+    name: task,
+    status: DEFAULT_STATUS,
+    priority: DEFAULT_PRIORITY,
+  });
 }
 
 function deleteTask(task) {
-  delete list[task];
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].name == task) {
+      list.splice(i, 1);
+    }
+  }
 }
 
-function showList() {
-  let tasks = {
-    [STATUSES.TO_DO]: "",
-    [STATUSES.IN_PROGRESS]: "",
-    [STATUSES.DONE]: "",
-  };
+function showBy(identifier) {
+  const identifiersList = {};
 
-  for (let key in list) {
-    tasks[list[key]] += `\n \"${[key]}"`;
+  for (element of list) {
+    if (identifier === "priority") {
+      for (let key in PRIORITY) {
+        identifiersList[PRIORITY[key]] = [];
+      }
+    } else if (identifier === "status") {
+      for (let key in STATUSES) {
+        identifiersList[STATUSES[key]] = [];
+      }
+    }
+    // identifiersList[element.identifier].push(element.name);
   }
 
-  console.log(
-    `Todo: ${tasks[STATUSES.TO_DO] || "\n -"} 
-    \rIn Progress: ${tasks[STATUSES.IN_PROGRESS] || "\n -"} 
-  \rDone: ${tasks[STATUSES.DONE] || "\n -"}`
-  );
+  for (element of list) {
+    identifiersList[element[identifier]].push(element.name);
+  }
+  for (let key in identifiersList) {
+    console.log(`${key}:`);
+    if (identifiersList[key].length) {
+      identifiersList[key].map((item) => {
+        console.log(` \"${item}\"`);
+      });
+    } else {
+      console.log(" -");
+    }
+  }
 }
-changeStatus("create a new practice task", STATUSES.DONE);
-addTask("have a walk");
-addTask("make toDo list");
-addTask("finish the work week");
-addTask("pass the algorithms exam");
-changeStatus("make toDo list", STATUSES.DONE);
-changeStatus("pass the algorithms exam", STATUSES.DONE);
-changeStatus("finish the work week", STATUSES.DONE);
-deleteTask("make a bed");
-deleteTask("create a new practice task");
-deleteTask("write a post");
 
-showList();
+changeStatus("make toDo list", STATUSES.IN_PROGRESS);
+addTask("have a walk");
+addTask("have a walk");
+changePriority("finish the working week", PRIORITY.HIGH);
+deleteTask("make a bed");
+
+showBy("priority");
+showBy("status");
