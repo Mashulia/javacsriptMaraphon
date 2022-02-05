@@ -31,14 +31,18 @@ const list = [
 ];
 
 function changeStatus(task, status) {
-  for (element of list) {
-    if (element.name === task) element.status = status;
-  }
+  list.forEach(element => {
+    if (element.name === task) {
+      element.status = status;
+    }
+  });
 }
 function changePriority(task, priority) {
-  for (element of list) {
-    if (element.name === task) element.priority = priority;
-  }
+  list.forEach(element => {
+    if (element.name === task) {
+      element.priority = priority;
+    }
+  });
 }
 
 function addTask(task) {
@@ -74,10 +78,9 @@ function showBy(identifier) {
       identifiersList[STATUSES[key]] = [];
     }
   }
-
-  for (element of list) {
+  list.forEach(element => {
     identifiersList[element[identifier]].push(element.name);
-  }
+  });
   for (let key in identifiersList) {
     console.log(`${key}:`);
     if (identifiersList[key].length) {
@@ -95,6 +98,7 @@ addTask("have a walk");
 addTask("have a walk");
 changePriority("finish the working week", PRIORITY.HIGH);
 deleteTask("make a bed");
+console.log(list)
 
 showBy("priority");
 showBy("status");
