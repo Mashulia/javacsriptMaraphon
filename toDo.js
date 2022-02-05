@@ -47,7 +47,7 @@ function changePriority(task, priority) {
 
 function addTask(task) {
   for (element of list) {
-    if (list.findIndex(element => element.name === task)) {
+    if (element.name === task) {
       return;
     }
   }
