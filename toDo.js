@@ -47,7 +47,7 @@ function changePriority(task, priority) {
 
 function addTask(task) {
   for (element of list) {
-    if (element.name === task) {
+    if (list.findIndex(element => element.name === task)) {
       return;
     }
   }
@@ -59,11 +59,8 @@ function addTask(task) {
 }
 
 function deleteTask(task) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].name == task) {
-      list.splice(i, 1);
-    }
-  }
+  let indexOfTask = list.findIndex(element => element.name === task);
+  list.splice(indexOfTask, 1);
 }
 
 function showBy(identifier) {
@@ -98,7 +95,5 @@ addTask("have a walk");
 addTask("have a walk");
 changePriority("finish the working week", PRIORITY.HIGH);
 deleteTask("make a bed");
-console.log(list)
-
 showBy("priority");
 showBy("status");
