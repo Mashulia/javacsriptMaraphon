@@ -31,14 +31,14 @@ const list = [
 ];
 
 function changeStatus(task, status) {
-  list.forEach(element => {
+  list.find(element => {
     if (element.name === task) {
-      element.status = status;
+      element.status = status
     }
   });
 }
 function changePriority(task, priority) {
-  list.forEach(element => {
+  list.find(element => {
     if (element.name === task) {
       element.priority = priority;
     }
@@ -60,7 +60,13 @@ function addTask(task) {
 
 function deleteTask(task) {
   let indexOfTask = list.findIndex(element => element.name === task);
-  list.splice(indexOfTask, 1);
+
+  if (indexOfTask === undefined) {
+    console.log("Current task is not exist in list")
+    return;
+  } else {
+    list.splice(indexOfTask, 1);
+  }
 }
 
 function showBy(identifier) {
