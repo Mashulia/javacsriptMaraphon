@@ -9,9 +9,9 @@ const PRIORITY = {
 };
 
 const DEFAULT_STATUS = STATUSES.TO_DO;
-const DEFAULT_PRIORITY = PRIORITY.HIGH;
+const DEFAULT_PRIORITY = PRIORITY.LOW;
 
-const list = [
+let list = [
   {
     name: "make toDo list",
     status: STATUSES.TO_DO,
@@ -31,18 +31,12 @@ const list = [
 ];
 
 function changeStatus(task, status) {
-  list.find((element) => {
-    if (element.name === task) {
-      element.status = status;
-    }
-  });
+  let currentElement = list.find((element) => element.name === task);
+  currentElement.status = status;
 }
 function changePriority(task, priority) {
-  list.find((element) => {
-    if (element.name === task) {
-      element.priority = priority;
-    }
-  });
+  let currentElement = list.find((element) => element.name === task);
+  currentElement.priority = priority;
 }
 
 function addTask(task) {
@@ -59,14 +53,7 @@ function addTask(task) {
 }
 
 function deleteTask(task) {
-  let indexOfTask = list.findIndex((element) => element.name === task);
-
-  if (indexOfTask === undefined) {
-    console.log("Current task is not exist in list");
-    return;
-  } else {
-    list.splice(indexOfTask, 1);
-  }
+  list = list.filter((element) => element.name !== task);
 }
 
 function showBy(identifier) {
@@ -101,6 +88,5 @@ addTask("have a walk");
 addTask("have a walk");
 changePriority("finish the working week", PRIORITY.HIGH);
 deleteTask("make a bed");
-
 showBy("priority");
 showBy("status");
