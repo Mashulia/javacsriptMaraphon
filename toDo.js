@@ -31,14 +31,18 @@ const list = [
 ];
 
 function changeStatus(task, status) {
-  for (element of list) {
-    if (element.name === task) element.status = status;
-  }
+  list.find((element) => {
+    if (element.name === task) {
+      element.status = status;
+    }
+  });
 }
 function changePriority(task, priority) {
-  for (element of list) {
-    if (element.name === task) element.priority = priority;
-  }
+  list.find((element) => {
+    if (element.name === task) {
+      element.priority = priority;
+    }
+  });
 }
 
 function addTask(task) {
@@ -55,32 +59,31 @@ function addTask(task) {
 }
 
 function deleteTask(task) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].name == task) {
-      list.splice(i, 1);
-    }
+  let indexOfTask = list.findIndex((element) => element.name === task);
+
+  if (indexOfTask === undefined) {
+    console.log("Current task is not exist in list");
+    return;
+  } else {
+    list.splice(indexOfTask, 1);
   }
 }
 
 function showBy(identifier) {
   const identifiersList = {};
 
-  for (element of list) {
-    if (identifier === "priority") {
-      for (let key in PRIORITY) {
-        identifiersList[PRIORITY[key]] = [];
-      }
-    } else if (identifier === "status") {
-      for (let key in STATUSES) {
-        identifiersList[STATUSES[key]] = [];
-      }
+  if (identifier === "priority") {
+    for (let key in PRIORITY) {
+      identifiersList[PRIORITY[key]] = [];
     }
-    // identifiersList[element.identifier].push(element.name);
+  } else if (identifier === "status") {
+    for (let key in STATUSES) {
+      identifiersList[STATUSES[key]] = [];
+    }
   }
-
-  for (element of list) {
+  list.forEach((element) => {
     identifiersList[element[identifier]].push(element.name);
-  }
+  });
   for (let key in identifiersList) {
     console.log(`${key}:`);
     if (identifiersList[key].length) {
