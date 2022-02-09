@@ -1,6 +1,6 @@
 function showVerticalMessage(str) {
   const MAX_LENGTH = 10;
-  const FIRST_LETTER = "М"
+  const FIRST_LETTER = "М";
   const UpperLetter = str.slice(0, 1).toUpperCase();
   let newString = "";
 
@@ -13,4 +13,4 @@ function showVerticalMessage(str) {
   }
 }
 
-showVerticalMessage('марафоныоыорпgjfgkk');
+showVerticalMessage("марафоныоыорпgjfgkk");
